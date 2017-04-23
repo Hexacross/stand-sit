@@ -2,6 +2,9 @@
 <html>
 	<head>
 		<title>StandSitSkill</title>
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script> 
+		
 		<script type="text/javascript" src="mind-framework.js"></script>
 		<script type="text/javascript">
 			mind.init({callback: function(robot) {
@@ -9,25 +12,56 @@
 				robot.connectSkill({
 					skillID: skillID
 				});
+				
 				document.getElementById("stand").onclick = function() {
-          console.log("sending stand command");
+				console.log("sending stand command");
 					robot.sendData({
 						skillID: skillID,
 						data: "stand"
 					})
 				}
+				
 				document.getElementById("sit").onclick = function() {
-          console.log("sending sit command");
+				console.log("sending sit command");
 					robot.sendData({
 						skillID: skillID,
 						data: "sit"
 					})
 				}
-			}});
+				
+				$(document).ready(function(){
+					$("#height").submit(function() {
+						console.log("to hexa");
+						robot.sendData({
+							skillID: skillID,
+							data: $("#height").find('input[name="height"]').val()
+						})
+					})
+					});
+				});
+		</script> 
+		
+		<script>
+			console.log("printing");
+			$(document).ready(function(){
+				$("#height").submit(function() {
+					console.log("inside");
+					console.log("value is: " + $("#height").find('input[name="height"]').val());
+					})
+				});
 		</script>
+		
 	</head>
 	<body>
 		<button id="stand">Stand!</button>
 		<button id="sit">Sit</button>
+
+
+		<form id="height">
+			height:<input type="float64" name="height" value="0.0">
+			<input type="submit" value="submit">
+		</form>
+
+
 	</body>
 </html>

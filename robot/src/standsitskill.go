@@ -50,7 +50,7 @@ func (d *StandSitSkill) OnRecvString(data string) {
 	log.Info.Println("Received string!!!!")
 	switch data {
 	case "stand":
-		hexabody.Stand()
+		hexabody.StandWithHeight(1.0) //replace this with data from browser
 	case "sit":
 		hexabody.RelaxLegs()
 	}
